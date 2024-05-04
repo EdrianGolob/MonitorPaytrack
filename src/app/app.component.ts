@@ -16,7 +16,7 @@ import { SharedModule } from './shared/shared.module';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-   menus: Array<PoMenuItem> = [];
+   menus: Array<PoMenuItem> = []
 
   constructor(private router: Router) {}
 
