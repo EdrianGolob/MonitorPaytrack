@@ -1,20 +1,9 @@
-<div class="po-wrapper"></div>
-
-<po-page-list
-    p-title="Adiantamento",
-    [p-actions]="actions",
-    [p-breadcrumb]="breadcrumb"
->
-
+<po-page-default p-title = 'ADIANTAMENTO'>
+    <div class="po-wrapper"></div>
+    
     <po-table
-        [p-items]="itens",
-        [p-columns]="colunas",
-        [p-actions]="tableAction"
-
-    ></po-table>
-
-
-    
-    
-</po-page-list>
+       [p-columns]="colunas" 
+       
+       ></po-table>
+</po-page-default>
 
