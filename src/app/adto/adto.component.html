@@ -1,9 +1,63 @@
-<po-page-default p-title = 'ADIANTAMENTO'>
+<po-page-list 
+    p-title = 'Paytrack - ADIANTAMENTOS'>
+
     <div class="po-wrapper"></div>
+
+    <po-button 
+        p-danger ="p-danger" 
+        p-label="FILTRO" 
+        p-icon="po-icon po-icon-filter"
+        (p-click)="modal.open()"
+    ></po-button>
+
+    <po-table 
+        [p-columns]="colunas" 
+    ></po-table>
+
     
-    <po-table
-       [p-columns]="colunas" 
-       
-       ></po-table>
-</po-page-default>
+
+    
+        <po-modal #modal
+            p-title="Filtros">
+            <div class="po-row">
+                <po-datepicker
+                  class="po-md-5"
+                  p-label="Emissão Inicial"
+                ></po-datepicker>
+                
+                <po-datepicker
+                  class="po-md-5"
+                  p-label="Emissão Final"
+                ></po-datepicker>
+            </div>
+
+            <div class="po-row">
+                <po-input
+                    class="po-md-6"
+                    p-label="Documento Inicial"
+                ></po-input>
+                
+                <po-input
+                    class="po-md-6"
+                    p-label="Documento Final"
+                ></po-input>
+            </div>
+
+            <div>
+                <po-input
+                    class="po-md-5"
+                    p-label="CPF/CNPJ Inicial"
+                ></po-input>
+    
+                <po-input
+                    class="po-md-5"
+                    p-label="CPF/CNPJ Final"
+                ></po-input>
+            </div>    
+
+        </po-modal>
+
+    
+    
+</po-page-list>
 
