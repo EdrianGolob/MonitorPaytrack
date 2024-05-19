@@ -7,7 +7,7 @@
         p-danger ="p-danger" 
         p-label="FILTRO" 
         p-icon="po-icon po-icon-filter"
-        (p-click)="modal.open()"
+        (p-click)="poModal.open()"
     ></po-button>
 
     <po-table 
@@ -15,49 +15,55 @@
     ></po-table>
 
     
+    <po-modal #poModal
+        p-title="Filtros"
+        [p-primary-action]="confirm"
+        [p-secondary-action]="close"
+        >
+        
+        <div class="po-row">
+            <po-datepicker
+              class="po-md-5"
+              p-label="Emissão Inicial"
+              name='emissaoIni'
+              ></po-datepicker>
+            
+            <po-datepicker
+              class="po-md-5"
+              p-label="Emissão Final"
+              name="emissaoFim"
+            ></po-datepicker>
+        </div>
 
-    
-        <po-modal #modal
-            p-title="Filtros">
-            <div class="po-row">
-                <po-datepicker
-                  class="po-md-5"
-                  p-label="Emissão Inicial"
-                ></po-datepicker>
-                
-                <po-datepicker
-                  class="po-md-5"
-                  p-label="Emissão Final"
-                ></po-datepicker>
-            </div>
+        <div class="po-row">
+            <po-input
+                class="po-md-6"
+                p-label="Documento Inicial"
+                name="documentoIni"
+            ></po-input>
+            
+            <po-input
+                class="po-md-6"
+                p-label="Documento Final"
+                name="documentoFim"
+            ></po-input>
+        </div>
 
-            <div class="po-row">
+        <div>
+            <po-input
+                class="po-md-5"
+                p-label="CPF/CNPJ Inicial"
+                name="cpfCnpjIni"
+            ></po-input>
                 <po-input
-                    class="po-md-6"
-                    p-label="Documento Inicial"
-                ></po-input>
-                
-                <po-input
-                    class="po-md-6"
-                    p-label="Documento Final"
-                ></po-input>
-            </div>
+                class="po-md-5"
+                p-label="CPF/CNPJ Final"
+                name="cpfCnpjFim"
+            ></po-input>
+        </div>    
 
-            <div>
-                <po-input
-                    class="po-md-5"
-                    p-label="CPF/CNPJ Inicial"
-                ></po-input>
-    
-                <po-input
-                    class="po-md-5"
-                    p-label="CPF/CNPJ Final"
-                ></po-input>
-            </div>    
-
-        </po-modal>
-
-    
-    
+    </po-modal>
+   
+   
 </po-page-list>
 
