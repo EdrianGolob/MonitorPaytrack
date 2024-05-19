@@ -1,0 +1,19 @@
+{
+    "tipo": "Adiantamento",
+    "observacao": "dados do campo observacao",
+    "codigo_documento": "10001",
+    "banco_transf": "341",
+    "cta_corrente_transf": "000341-1",
+    "cod_forma_pagto": "123",
+    "_expandables": null,
+    "data_vencimento": "2024-04-23",
+    "agencia_transf": "34101",
+    "cpf_cnpj": "12345678901",
+    "rowid": "0x00000000001607f0",
+    "valor_documento": 2000.5,
+    "conta_contabil": "10002003",
+    "natureza": "123",
+    "centro_custo": "1001",
+    "data_emissao": "2024-03-21"
+}
+

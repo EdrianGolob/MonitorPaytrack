@@ -10,4 +10,4 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [CommonModule, PoModule, PoMenuModule, PoPageModule, HttpClientModule, PoModalModule],
   exports: [PoModule, PoMenuModule, PoPageModule, PoModalModule, HttpClientModule]
 })
-export class SharedModule {}
+export class SharedModule {} 

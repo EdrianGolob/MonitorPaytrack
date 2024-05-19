@@ -1,36 +1,41 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
-import { PoModalAction, PoModalComponent, PoTableColumn } from '@po-ui/ng-components';
-import { PoNotificationService } from '@po-ui/ng-components';
-import { NgForm } from '@angular/forms';
-import { adtoService } from '../shared/services/adto.service';
 import { Router } from '@angular/router';
-import { Observable, pluck } from 'rxjs';
+import { PoModalAction, PoModalComponent, PoTableColumn } from '@po-ui/ng-components';
+import { Observable} from 'rxjs';
+import { filter, pluck } from 'rxjs/operators';
+
+import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
+import { adtoService } from '../shared/services/adto.service';
+import { HttpClient } from '@angular/common/http';
+import { itensAPI } from './models/adto';
 
 
 @Component({
   selector: 'app-adto',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, FormsModule],
   templateUrl: './adto.component.html',
   styleUrl: './adto.component.css'
 })
 
 export class AdtoComponent implements OnInit {
+  
+
   @ViewChild(PoModalComponent, { static: true}) poModal:any = PoModalComponent;
 
   filterData: any = {
-    emissaoIni: new Date(),
-    emissaoFim: new Date(),
-    documentoIni: '',
-    documentoFim: 'ZZZZZZZZZZ',
+    dataEmissaoIni: new Date(),
+    dataEmissaoDim: new Date(),
+    codigoDocumentoIni: '',
+    codigoDocumentoFim: 'ZZZZZZZZZZZZ',
     cpfCnpjIni: '',
-    cpfCnpjFim: 'ZZZZZZZZZZ',
+    cpfCnpjFim: 'ZZZZZZZZZZZZ',
     page: 1,
     pageSize: 10,
+    tipoDocumento: 'Adiantamento',
   };
 
- 
 
   colunas: Array<PoTableColumn> = 
   [ {property: 'codigo_documento',    label: 'CODIGO',      type: 'string', width: '10%'},
@@ -55,68 +60,61 @@ export class AdtoComponent implements OnInit {
   };
   
   confirm: PoModalAction = {
-    label: 'Confirma', action: this.atualizaDados.bind(this),
+     label: 'Confirma', action: this.updateData.bind(this),
   };
   
+  itens: any = []  //tableData
 
-  itens: any   //tableData
- 
+  
   items$!: Observable<boolean>;
-  hasMore$!: Observable<boolean>;
-  success$!: Observable<boolean>;
   
 
-  constructor(private service: adtoService) {}
+  constructor(private service: adtoService, 
+              private router: Router,
+              private http: HttpClient) {}
+ 
 
   ngOnInit(): void {
-
-    /*
-    if(localStorage.getItem("filter")) {
-      this.filterData = JSON.parse(localStorage.getItem("filter"));
-    }
-
-    if(localStorage.getItem("itens")) {
-      this.itens = JSON.parse(localStorage.getItem("itens"));
-    }
-   */ 
-
     if(this.itens.length <= 0) {
       this.updateData();
+      this.listarTodos();
     }
   }
 
-  
   closeModal() {
     this.poModal.close();
   }
   
-  atualizaDados() {
-    this.filterData.page = 1;
-    this.updateData();
+  listarTodos() {
+    this.http.get(this.itens).subscribe(() => this.itens);
+    //console.log(this.itens)
   }
 
-  private updateData() {
-    
-
+  updateData() {
     localStorage.setItem("filter", JSON.stringify(this.filterData));
+    localStorage.setItem("dados" , JSON.stringify(this.service.retornaItens));
 
+    let obs$ = this.service.getAll(this.filterData);
     
+    this.itens = this.service.retornaItens();
 
+    this.items$ = obs$.pipe(pluck('items'));
+    
     this.items$.subscribe((result) => {
       if (this.filterData.page == 1) {
         this.itens = [];
       }
-      
-      /*
-      if (result) {
-        result.forEach ((el: any) => {
-          this.itens.push(el);
-        });
-      }
-      */
     });
+    
+    /*
+    if (this.itens) {
+       this.itens.forEach ((el: any) => {this.itens.get(el) });
+    }
+    */ 
 
-    //this.hasMore$ = obs$.pipe(pluck('hasNext'));
+    this.closeModal();
   }
 
  }
+
+

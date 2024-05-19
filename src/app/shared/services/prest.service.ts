@@ -2,12 +2,12 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { itensAPI } from '../../adto/models/adto';
+import { prestAPI } from '../../adto/models/prest';
 
 
 //const endpoint = `${environment.url}/v1/paytapi003`; 
 
-const endpoint = `http://acesso.newtechs.com.br:3392/api/esp/v1/paytapi003`; 
+const endpoint = `http://acesso.newtechs.com.br:3392/api/esp/v1/paytapi004`; 
 
 var header = new HttpHeaders().set('Authorization', "Basic " + btoa(environment.auth))
 
@@ -15,7 +15,7 @@ var header = new HttpHeaders().set('Authorization', "Basic " + btoa(environment.
 @Injectable({
   providedIn: 'root',
 })
-export class adtoService {
+export class PrestService {
 
   constructor(private httpClient: HttpClient) {}
 
@@ -23,8 +23,8 @@ export class adtoService {
     return this.httpClient.get<any>(endpoint,{headers:header, params:filter});
   }
  
-  public retornaItens():Observable<itensAPI> {
-    return this.httpClient.get<itensAPI>(endpoint,{observe:'body'});
+  public retornaItens():Observable<prestAPI> {
+    return this.httpClient.get<prestAPI>(endpoint,{observe:'body'});
   }
   
 }

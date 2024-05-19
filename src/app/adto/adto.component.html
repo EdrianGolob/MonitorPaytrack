@@ -12,6 +12,10 @@
 
     <po-table 
         [p-columns]="colunas" 
+        [p-items]="itens"
+        p-container="shadow"
+        [p-height]="420"
+        
     ></po-table>
 
     
@@ -26,12 +30,16 @@
               class="po-md-5"
               p-label="Emissão Inicial"
               name='emissaoIni'
+              p-format="dd/mm/yyyy"
+              [(ngModel)]="filterData.dataEmissaoIni"
               ></po-datepicker>
             
             <po-datepicker
               class="po-md-5"
               p-label="Emissão Final"
               name="emissaoFim"
+              p-format="dd/mm/yyyy"
+              [(ngModel)]="filterData.dataEmissaoDim"
             ></po-datepicker>
         </div>
 
@@ -40,12 +48,14 @@
                 class="po-md-6"
                 p-label="Documento Inicial"
                 name="documentoIni"
+                [(ngModel)]="filterData.codigoDocumentoIni"
             ></po-input>
             
             <po-input
                 class="po-md-6"
                 p-label="Documento Final"
                 name="documentoFim"
+                [(ngModel)]="filterData.codigoDocumentoFim"
             ></po-input>
         </div>
 
@@ -54,11 +64,13 @@
                 class="po-md-5"
                 p-label="CPF/CNPJ Inicial"
                 name="cpfCnpjIni"
+                [(ngModel)]="filterData.cpfCnpjIni"
             ></po-input>
                 <po-input
                 class="po-md-5"
                 p-label="CPF/CNPJ Final"
                 name="cpfCnpjFim"
+                [(ngModel)]="filterData.cpfCnpjFim"
             ></po-input>
         </div>    
 
