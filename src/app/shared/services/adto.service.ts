@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { itensAPI } from '../../adto/models/adto';
+
 
 
 //const endpoint = `${environment.url}/v1/paytapi003`; 
@@ -22,9 +22,4 @@ export class adtoService {
   public getAll(filter:any): Observable<any> {
     return this.httpClient.get<any>(endpoint,{headers:header, params:filter});
   }
- 
-  public retornaItens():Observable<itensAPI> {
-    return this.httpClient.get<itensAPI>(endpoint,{observe:'body'});
-  }
-  
 }

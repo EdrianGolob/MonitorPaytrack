@@ -13,9 +13,13 @@
     <po-table 
         [p-columns]="colunas" 
         [p-items]="itens"
+        [p-actions]="acoes"
+        (p-show-more)="onShowMore()"
+        [p-show-more-disabled]="!(hasMore$)"
         p-container="shadow"
         [p-height]="420"
         [p-hide-detail]="false"
+        p-striped="true"
     ></po-table>
 
     <po-modal #poModal
@@ -76,5 +80,7 @@
     </po-modal>
 
  </po-page-list>
+
+ 
 
 

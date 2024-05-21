@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { PoModalAction, PoModalComponent, PoTableColumn } from '@po-ui/ng-components';
+import { PoModalAction, PoModalComponent, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { Observable} from 'rxjs';
 import { filter, pluck } from 'rxjs/operators';
 
@@ -8,7 +8,6 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { adtoService } from '../shared/services/adto.service';
 import { HttpClient } from '@angular/common/http';
-import { itensAPI } from './models/adto';
 
 
 @Component({
@@ -20,8 +19,6 @@ import { itensAPI } from './models/adto';
 })
 
 export class AdtoComponent implements OnInit {
-  
-
   @ViewChild(PoModalComponent, { static: true}) poModal:any = PoModalComponent;
 
   filterData: any = {
@@ -32,7 +29,7 @@ export class AdtoComponent implements OnInit {
     cpfCnpjIni: '',
     cpfCnpjFim: 'ZZZZZZZZZZZZ',
     page: 1,
-    pageSize: 10,
+    pageSize: 30,
     tipoDocumento: 'Adiantamento',
   };
 
@@ -60,61 +57,55 @@ export class AdtoComponent implements OnInit {
   };
   
   confirm: PoModalAction = {
-     label: 'Confirma', action: this.updateData.bind(this),
+     //label: 'Confirma', action: this.retornaDadosAdto.bind(this),
+     label: 'Confirma', action: () => {this.onListaDados(); }
   };
   
   itens: any = []  //tableData
 
+  obs$!: Observable<boolean>;
+  hasMore$!: Observable<boolean>;
   
-  items$!: Observable<boolean>;
-  
-
   constructor(private service: adtoService, 
               private router: Router,
               private http: HttpClient) {}
  
 
   ngOnInit(): void {
-    if(this.itens.length <= 0) {
-      this.updateData();
-      this.listarTodos();
-    }
+    this.retornaDadosAdto();
   }
 
   closeModal() {
-    this.poModal.close();
+    this.poModal.close()
   }
+
+  onShowMore() {
+    this.filterData.page++;
+    this.retornaDadosAdto();
+  };
+
+  onListaDados() {
+    this.filterData.page = 1;
+    this.retornaDadosAdto();
+  };
   
-  listarTodos() {
-    this.http.get(this.itens).subscribe(() => this.itens);
-    //console.log(this.itens)
-  }
-
-  updateData() {
-    localStorage.setItem("filter", JSON.stringify(this.filterData));
-    localStorage.setItem("dados" , JSON.stringify(this.service.retornaItens));
-
+  retornaDadosAdto() {
     let obs$ = this.service.getAll(this.filterData);
-    
-    this.itens = this.service.retornaItens();
-
-    this.items$ = obs$.pipe(pluck('items'));
-    
-    this.items$.subscribe((result) => {
-      if (this.filterData.page == 1) {
-        this.itens = [];
+    this.service.getAll(this.filterData).subscribe({
+      next:result => {
+        this.itens = result.items
+      },
+      error:erro => {
+        console.log(erro)
+      },
+      complete:() => {
+        this.closeModal();
       }
-    });
-    
-    /*
-    if (this.itens) {
-       this.itens.forEach ((el: any) => {this.itens.get(el) });
-    }
-    */ 
+    })
 
-    this.closeModal();
+    this.hasMore$ = obs$.pipe(pluck('hasNext'));
+
   }
-
- }
+}
 
 

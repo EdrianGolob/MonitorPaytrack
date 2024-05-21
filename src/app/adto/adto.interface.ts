@@ -1,4 +1,5 @@
-export interface Item {
+export interface Adiantamento
+ {
     codigo_documento: string;
 	tipo: string;
     cpf_cnpj: string;                       
@@ -15,8 +16,8 @@ export interface Item {
 	cta_corrente_transf: string;
 }
 
-export interface itensAPI { //RootObject
+export interface adtoAPI { //RootObject
 	hasNext: boolean;
-	items: Item[];
+	items: Adiantamento[];
 }
 

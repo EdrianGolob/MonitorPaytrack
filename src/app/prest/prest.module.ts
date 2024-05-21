@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { PrestRoutingModule } from './prest-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { PrestService } from '../shared/services/prest.service';
+
 
 
 @NgModule({
@@ -11,7 +13,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     PrestRoutingModule,
     SharedModule,
-    FormsModule
-  ]
+    FormsModule,
+  ],
+  providers: [PrestService]
 })
 export class PrestModule { }

@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { Router } from '@angular/router';
-import { PoModalAction, PoModalComponent, PoTableColumn } from '@po-ui/ng-components';
+import { PoModalAction, PoModalComponent, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { Observable} from 'rxjs';
 import { filter, pluck } from 'rxjs/operators';
-
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
-
 import { HttpClient } from '@angular/common/http';
 import { PrestService } from '../shared/services/prest.service';
 
@@ -21,9 +20,9 @@ import { PrestService } from '../shared/services/prest.service';
 })
 
 export class PrestComponent implements OnInit {
-  
+   @ViewChild(PoModalComponent, { static: true}) poModal:any = PoModalComponent;
 
-  @ViewChild(PoModalComponent, { static: true}) poModal:any = PoModalComponent;
+   temRateio: any;
 
   filterData: any = {
     dataEmissaoIni: new Date(),
@@ -33,85 +32,87 @@ export class PrestComponent implements OnInit {
     cpfCnpjIni: '',
     cpfCnpjFim: 'ZZZZZZZZZZZZ',
     page: 1,
-    pageSize: 10,
+    pageSize: 30,
     tipoDocumento: 'PrestacaoContas',
   };
 
-
-  colunas: Array<PoTableColumn> = 
-  [ {property: 'codigo_documento',    label: 'CODIGO',      type: 'string', width: '10%'},
-    {property: 'tipo',                label: 'TIPO',        type: 'string', width: '10%'},
-    {property: 'cpf_cnpj',            label: 'CPF/CNPJ',    type: 'string'},
-    {property: 'data_emissao',        label: 'EMISSÃO',     type: 'date'  , width: '12%'},
-    {property: 'data_vencimento',     label: 'VENCIMENTO',  type: 'date'  , width: '12%'},
-    {property: 'valor_documento',     label: 'VALOR',       type: 'string'},
-    {property: 'observação',          label: 'OBSERVAÇÃO',  type: 'string'},
-    {property: 'conta_contabil',      label: 'CTA.CONTABIL',type: 'string'},
-    {property: 'natureza',            label: 'NATUREZA',    type: 'string'},
-    {property: 'centro_custo',        label: 'C.CUSTO',     type: 'string'},
-    {property: 'rateio_centro_custo', label: 'RATEIO',      type: 'string'},
-    {property: 'rateio_cc',           label: 'RATEIO CC',   type: 'string'},
+  colunas: Array<PoTableColumn> = [ 
+    { property: 'codigo_documento',    label: 'CODIGO',      type: 'string', width: '10%'},
+    { property: 'tipo',                label: 'TIPO',        type: 'string', width: '10%'},
+    { property: 'cpf_cnpj',            label: 'CPF/CNPJ',    type: 'string'},
+    { property: 'data_emissao',        label: 'EMISSÃO',     type: 'date'  , width: '12%'},
+    { property: 'data_vencimento',     label: 'VENCIMENTO',  type: 'date'  , width: '12%'},
+    { property: 'valor_documento',     label: 'VALOR',       type: 'string'},
+    { property: 'observação',          label: 'OBSERVAÇÃO',  type: 'string'},
+    { property: 'conta_contabil',      label: 'CTA.CONTABIL',type: 'string'},
+    { property: 'natureza',            label: 'NATUREZA',    type: 'string'},
+    { property: 'centro_custo',        label: 'C.CUSTO',     type: 'string'},
+    { property: 'rateio_centro_custo', label: 'RATEIO',      type: 'string'},
+    { property: 'rateio_cc',           label: 'RATEIO CC',   type: 'string'},
   ];
 
- 
+  acoes: PoTableAction[] =  [
+    {label: 'Rateio', action: this.rateio.bind(this)}
+  ];
+  
   close: PoModalAction = {
     label: 'Cancela', action: () => {this.closeModal(); }
   };
   
   confirm: PoModalAction = {
-    label: 'Confirma', action: this.updateData.bind(this),
+    //label: 'Confirma', action: this.retornaDadosPrest.bind(this),
+    label: 'Confirma', action: () => {this.onListaDados(); }
   };
   
   itens: any = []  //tableData
-
-  
-  items$!: Observable<boolean>;
-  
+  obs$!: Observable<boolean>;
+  hasMore$!: Observable<boolean>;
 
   constructor(private service: PrestService, 
               private router: Router,
               private http: HttpClient) {}
  
-
   ngOnInit(): void {
-    if(this.itens.length <= 0) {
-      this.updateData();
-      this.listarTodos();
-    }
+    this.retornaDadosPrest();
   }
 
   closeModal() {
     this.poModal.close();
   }
-  
-  listarTodos() {
-    this.http.get(this.itens).subscribe(() => this.itens);
-    //console.log(this.itens)
+
+  onShowMore() {
+    this.filterData.page++;
+    this.retornaDadosPrest();
   }
 
-  updateData() {
-    localStorage.setItem("filter", JSON.stringify(this.filterData));
-    localStorage.setItem("dados" , JSON.stringify(this.service.retornaItens));
+  onListaDados() {
+    this.filterData.page = 1;
+    this.retornaDadosPrest();
+  }
 
+  retornaDadosPrest() {
     let obs$ = this.service.getAll(this.filterData);
-    
-    this.itens = this.service.retornaItens();
-
-    this.items$ = obs$.pipe(pluck('items'));
-    
-    this.items$.subscribe((result) => {
-      if (this.filterData.page == 1) {
-        this.itens = [];
+    this.service.getAll(this.filterData).subscribe({
+      next:result => {
+        this.itens = result.items
+      },
+      error:erro => {
+        console.log(erro)
+      },
+      complete:() => {
+        this.closeModal();
       }
-    });
-    
-    /*
-    if (this.itens) {
-       this.itens.forEach ((el: any) => {this.itens.get(el) });
-    }
-    */ 
+    })
 
-    this.closeModal();
+    this.hasMore$ = obs$.pipe(pluck('hasNext'));
+       
   }
 
- }
+  rateio(args: any) {
+    this.temRateio = args['rateio_cc']
+    if (this.temRateio === true) {
+      this.poModal.open();
+      
+    }
+  }
+}

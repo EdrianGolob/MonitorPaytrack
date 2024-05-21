@@ -13,8 +13,12 @@
     <po-table 
         [p-columns]="colunas" 
         [p-items]="itens"
+        (p-show-more)="onShowMore()"
+        [p-show-more-disabled]="!(hasMore$)"
         p-container="shadow"
         [p-height]="420"
+        [p-hide-detail]="false"
+        p-striped="true"
         
     ></po-table>
 

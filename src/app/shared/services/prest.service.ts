@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { prestAPI } from '../../adto/models/prest';
+import { prestAPI } from '../../prest/prest.interface';
 
 
 //const endpoint = `${environment.url}/v1/paytapi003`; 
@@ -23,8 +23,5 @@ export class PrestService {
     return this.httpClient.get<any>(endpoint,{headers:header, params:filter});
   }
  
-  public retornaItens():Observable<prestAPI> {
-    return this.httpClient.get<prestAPI>(endpoint,{observe:'body'});
-  }
   
 }
