@@ -4,7 +4,7 @@
     <div class="po-wrapper"></div>
 
     <po-button 
-        p-danger ="p-danger" 
+        p-danger="p-danger" 
         p-label="FILTRO" 
         p-icon="po-icon po-icon-filter"
         (p-click)="poModal.open()"
@@ -20,7 +20,11 @@
         [p-height]="420"
         [p-hide-detail]="false"
         p-striped="true"
-    ></po-table>
+    >
+   
+   
+   
+   </po-table>
 
     <po-modal #poModal
         p-title="Filtros"
@@ -47,39 +51,44 @@
         </div>
 
         <div class="po-row">
-            <po-input
-                class="po-md-6"
-                p-label="Documento Inicial"
-                name="documentoIni"
-                [(ngModel)]="filterData.codigoDocumentoIni"
-            ></po-input>
+           <po-input
+              class="po-md-6"
+              p-label="Documento Inicial"
+              name="documentoIni"
+              [(ngModel)]="filterData.codigoDocumentoIni"
+           ></po-input>
             
-            <po-input
-                class="po-md-6"
-                p-label="Documento Final"
-                name="documentoFim"
-                [(ngModel)]="filterData.codigoDocumentoFim"
-            ></po-input>
+           <po-input
+              class="po-md-6"
+              p-label="Documento Final"
+              name="documentoFim"
+              [(ngModel)]="filterData.codigoDocumentoFim"
+           ></po-input>
         </div>
 
         <div>
-            <po-input
-                class="po-md-5"
-                p-label="CPF/CNPJ Inicial"
-                name="cpfCnpjIni"
-                [(ngModel)]="filterData.cpfCnpjIni"
-            ></po-input>
-                <po-input
-                class="po-md-5"
-                p-label="CPF/CNPJ Final"
-                name="cpfCnpjFim"
-                [(ngModel)]="filterData.cpfCnpjFim"
-            ></po-input>
+           <po-input
+              class="po-md-5"
+              p-label="CPF/CNPJ Inicial"
+              name="cpfCnpjIni"
+              [(ngModel)]="filterData.cpfCnpjIni"
+           ></po-input>
+           <po-input
+              class="po-md-5"
+              p-label="CPF/CNPJ Final"
+              name="cpfCnpjFim"
+              [(ngModel)]="filterData.cpfCnpjFim"
+           ></po-input>
         </div>    
-
     </po-modal>
 
  </po-page-list>
+
+
+
+
+
+ 
 
  
 

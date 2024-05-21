@@ -8,13 +8,13 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { PrestService } from '../shared/services/prest.service';
-
-
+import { PoPageDynamicTableModule } from '@po-ui/ng-templates';
+import { RateioComponent } from './rateio/rateio.component';
 
 @Component({
   selector: 'app-adto',
   standalone: true,
-  imports: [SharedModule, FormsModule],
+  imports: [SharedModule, FormsModule, PoPageDynamicTableModule],
   templateUrl: './prest.component.html',
   styleUrl: './prest.component.css'
 })
@@ -22,9 +22,7 @@ import { PrestService } from '../shared/services/prest.service';
 export class PrestComponent implements OnInit {
    @ViewChild(PoModalComponent, { static: true}) poModal:any = PoModalComponent;
 
-   temRateio: any;
-
-  filterData: any = {
+   filterData: any = {
     dataEmissaoIni: new Date(),
     dataEmissaoDim: new Date(),
     codigoDocumentoIni: '',
@@ -52,21 +50,25 @@ export class PrestComponent implements OnInit {
   ];
 
   acoes: PoTableAction[] =  [
-    {label: 'Rateio', action: this.rateio.bind(this)}
+    {label: 'Rateios', action: this.rateio.bind(this)}
+    //{label: 'Rateio', url: ''} action: () => this.router.navigate(['cuf0069'])
+    //{label: 'Rateios', action: () => this.router.navigate(['rateio'])}
   ];
   
   close: PoModalAction = {
-    label: 'Cancela', action: () => {this.closeModal(); }
+    label: 'Cancela', action: () => {this.closeModal()}
   };
   
   confirm: PoModalAction = {
-    //label: 'Confirma', action: this.retornaDadosPrest.bind(this),
-    label: 'Confirma', action: () => {this.onListaDados(); }
+     label: 'Confirma', action: () => {this.onListaDados()}
   };
+  
   
   itens: any = []  //tableData
   obs$!: Observable<boolean>;
   hasMore$!: Observable<boolean>;
+  
+  temRateio: any;
 
   constructor(private service: PrestService, 
               private router: Router,
@@ -109,10 +111,11 @@ export class PrestComponent implements OnInit {
   }
 
   rateio(args: any) {
+    
     this.temRateio = args['rateio_cc']
     if (this.temRateio === true) {
-      this.poModal.open();
-      
+       this.router.navigate(['./prest/rateio']);
     }
+
   }
 }

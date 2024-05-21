@@ -22,6 +22,12 @@ export class PrestService {
   public getAll(filter:any): Observable<any> {
     return this.httpClient.get<any>(endpoint,{headers:header, params:filter});
   }
+
+  /*
+  public getRateio(rowid: string): Observable<any> {
+    return this.httpClient.get<any>(endpoint,{headers:header, rowid});
+  }
+  */
  
   
 }

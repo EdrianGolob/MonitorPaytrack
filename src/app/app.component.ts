@@ -25,20 +25,11 @@ export class AppComponent implements OnInit {
   
 }
 
-getMenu(): Array<PoMenuItem> {
-  return [
-    {label: 'Adiantamento', link: '/adto'},
-    {label: 'Prestação de Contas', link: '/prest'}
-  ]
-
-
-}
-
-  private onAdto() {
-    alert('Clicked in menu item');
-  }
-
-  private onPrest() {
-    alert('Clicked in menu item');
+  getMenu(): Array<PoMenuItem> {
+    return [
+      {label: 'Adiantamento', link: '/adto'},
+      {label: 'Prestação de Contas', link: '/prest'}
+    ]
   }
 }
+
