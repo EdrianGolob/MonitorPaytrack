@@ -1,10 +1,6 @@
-import { Component, OnInit} from '@angular/core';
-import { SharedModule } from '../../shared/shared.module';
+import { Component, OnInit } from '@angular/core';
 import { PoTableColumn } from '@po-ui/ng-components';
 import { PrestService } from '../../shared/services/prest.service';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Action } from 'rxjs/internal/scheduler/Action';
 
 @Component({
   selector: 'app-rateio',
@@ -14,53 +10,45 @@ import { Action } from 'rxjs/internal/scheduler/Action';
 
 export class RateioComponent implements OnInit {
 
-  colunasRateio: Array<PoTableColumn> = [ 
-    { property: 'cc',                  label: 'C.CUSTO',     type: 'string'},
-    { property: 'tipo',                label: 'TIPO',        type: 'string', width: '10%'},
+  /*
+  filterData: any = {
+    page: 1,
+    pageSize: 50,
+  };
+*/
+ colunasRateio: Array<PoTableColumn> = [ 
+    { property: 'cc',                  label: 'C.CUSTO',     type: 'string', width: '10%'},
+    { property: 'tipo',                label: 'TIPO',        type: 'string', width: '20%'},
     { property: 'codigo_documento',    label: 'CODIGO',      type: 'string', width: '10%'},
-    { property: 'percentual_rateio',   label: '% RATEIO',    type: 'string'},
-    { property: 'valor_rateios',       label: 'VALOR RATEIO',type: 'string'},
+    { property: 'percentual_rateio',   label: '% RATEIO',    type: 'string', width: '10%'},
+    { property: 'valor_rateios',       label: 'VALOR RATEIO',type: 'currency', format: 'BRL', width: '20%'},
     { property: 'cpf_cnpj',            label: 'CPF/CNPJ',    type: 'string'},
     
   ];
 
-  actionVoltar: any = {action: this.voltaPrest.bind(this)}
+  itensRateio: any;
 
-  itensRateio: any
+   //hasMore$!: Observable<boolean>;
 
-  constructor(private service: PrestService, 
-              private router: Router,
-              private http: HttpClient) {}
+  constructor(private service: PrestService) {}
 
+  ngOnInit(): void {
+    this.listaRateio()
+  }
 
-ngOnInit() {
+  voltaPrest() {
+  }
  
-
-}
-
-voltaPrest() {
-  alert('volta')
-  //this.router.navigate(['./prest']);
-
-
-  
-}
-
-/*
-private listaRateio() {
-
-  this.service.getAll(this.filterData).subscribe({
-    next:result => {
-      this.itens = result.items
-    },
-    error:erro => {
-      console.log(erro)
-    },
-    complete:() => {
-      this.closeModal();
-    }
-  })
-}
-*/
+  listaRateio() {
+    const rowid: string = sessionStorage.getItem('rowidPrest') || ''  //atencao
+    this.service.getRateio(rowid).subscribe({
+      next:result => {
+        this.itensRateio = result.items
+      },
+      error:erro => {
+        console.log(erro)
+      },
+    })
+  }
 
 }

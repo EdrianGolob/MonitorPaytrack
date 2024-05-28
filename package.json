@@ -1,10 +1,10 @@
 {
-  "name": "monitor-paytrack",
+  "name": "package-monitor-paytrack",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --proxy-config proxy.config.json",
-    "build": "set NODE_OPTIONS=--openssl-legacy-provider && ng build",
+    "start": "ng serve",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
@@ -21,6 +21,7 @@
     "@angular/router": "^17.3.0",
     "@po-ui/ng-components": "^17.7.0",
     "@po-ui/ng-templates": "^17.11.0",
+    "@totvs/po-theme": "^17.11.0",
     "ngx-cookie-service": "^17.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

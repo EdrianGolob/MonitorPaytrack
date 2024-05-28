@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RateioComponent } from './rateio.component';
+import { PrestModule } from '../prest.module';
+
 
 describe('RateioComponent', () => {
   let component: RateioComponent;
@@ -8,7 +10,7 @@ describe('RateioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RateioComponent]
+      imports: [RateioComponent, PrestModule]
     })
     .compileComponents();
     

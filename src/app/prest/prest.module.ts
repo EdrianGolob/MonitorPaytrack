@@ -8,15 +8,13 @@ import { RateioComponent } from './rateio/rateio.component';
 
 
 @NgModule({
-  declarations: [
-    RateioComponent,
-  ],
+  declarations: [RateioComponent],
   imports: [
     CommonModule,
     PrestRoutingModule,
     SharedModule,
-    FormsModule,
-    ],
+    FormsModule    
+  ],
   providers: [PrestService]
 })
 export class PrestModule { }

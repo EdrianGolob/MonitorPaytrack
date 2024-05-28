@@ -40,7 +40,7 @@ export class AdtoComponent implements OnInit {
     {property: 'cpf_cnpj',            label: 'CPF/CNPJ',    type: 'string'},
     {property: 'data_emissao',        label: 'EMISSÃO',     type: 'date'  , width: '12%'},
     {property: 'data_vencimento',     label: 'VENCIMENTO',  type: 'date'  , width: '12%'},
-    {property: 'valor_documento',     label: 'VALOR',       type: 'string'},
+    {property: 'valor_documento',     label: 'VALOR',       type: 'currency', format: 'BRL'},
     {property: 'observação',          label: 'OBSERVAÇÃO',  type: 'string'},
     {property: 'cod_forma_pagto',     label: 'FORMA PAGTO', type: 'string'},
     {property: 'conta_contabil',      label: 'CTA.CONTABIL',type: 'string'},
@@ -49,6 +49,7 @@ export class AdtoComponent implements OnInit {
     {property: 'banco_transf',        label: 'BANCO',       type: 'string'},
     {property: 'agencia_transf',      label: 'AGENCIA',     type: 'string'},
     {property: 'cta_corrente_transf', label: 'C.CORRENTE',  type: 'string'},
+    {property: 'Unid_negocio',        label: 'UNID.NEGOCIO',type: 'string'},
   ];
 
  
@@ -78,11 +79,6 @@ export class AdtoComponent implements OnInit {
   closeModal() {
     this.poModal.close()
   }
-
-  onShowMore() {
-    this.filterData.page++;
-    this.retornaDadosAdto();
-  };
 
   onListaDados() {
     this.filterData.page = 1;

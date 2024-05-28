@@ -1,95 +1,90 @@
-<po-page-list 
-    p-title = 'Paytrack - PRESTAÇÃO DE CONTAS'>
+<po-page-list p-title="Prestação de Contas">
 
-    <div class="po-wrapper"></div>
+   <div class="po-wrapper"></div>
 
-    <po-button 
-        p-danger="p-danger" 
-        p-label="FILTRO" 
-        p-icon="po-icon po-icon-filter"
-        (p-click)="poModal.open()"
-    ></po-button>
+   <po-button 
+      p-danger="p-danger" 
+      p-label="FILTRO" 
+      p-icon="po-icon po-icon-filter"
+      (p-click)="poModal.open()"
+   ></po-button>
 
-    <po-table 
-        [p-columns]="colunas" 
-        [p-items]="itens"
-        [p-actions]="acoes"
-        (p-show-more)="onShowMore()"
-        [p-show-more-disabled]="!(hasMore$)"
-        p-container="shadow"
-        [p-height]="420"
-        [p-hide-detail]="false"
-        p-striped="true"
-    >
-   
-   
-   
+   <po-table #tableMonitoramento
+      [p-columns]="colunas" 
+      [p-items]="itens"
+      [p-actions]="acoes"
+      p-infinity-scroll="true"
+      [p-infinite-scroll-distance]=90
+      p-container="shadow"
+      [p-height]="415"
+      [p-hide-detail]="false"
+      p-striped="true"
+   > 
    </po-table>
 
-    <po-modal #poModal
-        p-title="Filtros"
-        [p-primary-action]="confirm"
-        [p-secondary-action]="close"
-        >
-        
-        <div class="po-row">
-            <po-datepicker
-              class="po-md-5"
-              p-label="Emissão Inicial"
-              name='emissaoIni'
-              p-format="dd/mm/yyyy"
-              [(ngModel)]="filterData.dataEmissaoIni"
-              ></po-datepicker>
-            
-            <po-datepicker
-              class="po-md-5"
-              p-label="Emissão Final"
-              name="emissaoFim"
-              p-format="dd/mm/yyyy"
-              [(ngModel)]="filterData.dataEmissaoDim"
-            ></po-datepicker>
-        </div>
+   <po-modal #poModal
+      p-title="Filtros"
+      [p-primary-action]="confirm"
+      [p-secondary-action]="close"
+      >
+      <div class="po-row">
+         <po-datepicker
+            class="po-md-5"
+            p-label="Emissão Inicial"
+            name='emissaoIni'
+            p-format="dd/mm/yyyy"
+            [(ngModel)]="filterData.dataEmissaoIni"
+         >
+         </po-datepicker>
+         
+         <po-datepicker
+            class="po-md-5"
+            p-label="Emissão Final"
+            name="emissaoFim"
+            p-format="dd/mm/yyyy"
+            [(ngModel)]="filterData.dataEmissaoDim"
+         >
+         </po-datepicker>
+      </div>
 
-        <div class="po-row">
-           <po-input
-              class="po-md-6"
-              p-label="Documento Inicial"
-              name="documentoIni"
-              [(ngModel)]="filterData.codigoDocumentoIni"
-           ></po-input>
-            
-           <po-input
-              class="po-md-6"
-              p-label="Documento Final"
-              name="documentoFim"
-              [(ngModel)]="filterData.codigoDocumentoFim"
-           ></po-input>
-        </div>
+      <div class="po-row">
+         <po-input
+            class="po-md-6"
+            p-label="Documento Inicial"
+            name="documentoIni"
+            [(ngModel)]="filterData.codigoDocumentoIni"
+         >
+         </po-input>
+         
+         <po-input
+            class="po-md-6"
+            p-label="Documento Final"
+            name="documentoFim"
+            [(ngModel)]="filterData.codigoDocumentoFim"
+         >
+         </po-input>
+      </div>
 
-        <div>
-           <po-input
-              class="po-md-5"
-              p-label="CPF/CNPJ Inicial"
-              name="cpfCnpjIni"
-              [(ngModel)]="filterData.cpfCnpjIni"
-           ></po-input>
-           <po-input
-              class="po-md-5"
-              p-label="CPF/CNPJ Final"
-              name="cpfCnpjFim"
-              [(ngModel)]="filterData.cpfCnpjFim"
-           ></po-input>
-        </div>    
-    </po-modal>
+      <div>
+         <po-input
+            class="po-md-5"
+            p-label="CPF/CNPJ Inicial"
+            name="cpfCnpjIni"
+            [(ngModel)]="filterData.cpfCnpjIni"
+         >
+         </po-input>
+         <po-input
+            class="po-md-5"
+            p-label="CPF/CNPJ Final"
+            name="cpfCnpjFim"
+            [(ngModel)]="filterData.cpfCnpjFim"
+         >
+         </po-input>
+      </div>   
 
- </po-page-list>
+   </po-modal>
 
-
-
-
-
- 
-
+</po-page-list>
  
 
 

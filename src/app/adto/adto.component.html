@@ -1,5 +1,5 @@
 <po-page-list 
-    p-title = 'Paytrack - ADIANTAMENTOS'>
+    p-title = 'Adiantamentos'>
 
     <div class="po-wrapper"></div>
 
@@ -13,10 +13,10 @@
     <po-table 
         [p-columns]="colunas" 
         [p-items]="itens"
-        (p-show-more)="onShowMore()"
-        [p-show-more-disabled]="!(hasMore$)"
+        [p-infinite-scroll]="true"
+        [p-infinite-scroll-distance]=90
         p-container="shadow"
-        [p-height]="420"
+        [p-height]="415"
         [p-hide-detail]="false"
         p-striped="true"
         

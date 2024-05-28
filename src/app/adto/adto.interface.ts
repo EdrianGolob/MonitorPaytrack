@@ -6,7 +6,6 @@ export interface Adiantamento
 	data_emissao: string;
     data_vencimento: string;
     valor_documento: number;
-	observacao: string;
     cod_forma_pagto: string;
     conta_contabil: string;
 	natureza: string;	
@@ -14,6 +13,7 @@ export interface Adiantamento
     banco_transf: string;
     agencia_transf: string;
 	cta_corrente_transf: string;
+    observacao: string;
 }
 
 export interface adtoAPI { //RootObject

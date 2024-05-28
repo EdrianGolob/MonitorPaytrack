@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { PoMenuItem} from '@po-ui/ng-components';
 import { SharedModule } from './shared/shared.module';
 
@@ -15,21 +15,37 @@ import { SharedModule } from './shared/shared.module';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
-   menus: Array<PoMenuItem> = []
+//export class AppComponent implements OnInit {
+export class AppComponent {
+
+  menus: Array<PoMenuItem> = 
+  [
+    {label: 'Adiantamento',        
+     //shortLabel: 'Adto', 
+     //action: this.menuAction.bind(this),       
+     link: './adto', 
+     icon: 'po-icon po-icon-star'},
+
+    {label: 'Prestação de Contas', 
+     //shortLabel: 'Prest',
+     //action: this.menuAction.bind(this),  
+     link: './prest', 
+     icon: 'po-icon po-icon-money'}
+  ]
+
+  menuItemSelected: string = ''
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    this.menus = this.getMenu()
-  
-}
+  ngOnInit(): void {}
+    
+ 
 
-  getMenu(): Array<PoMenuItem> {
-    return [
-      {label: 'Adiantamento', link: '/adto'},
-      {label: 'Prestação de Contas', link: '/prest'}
-    ]
+
+  menuAction(menu: PoMenuItem) {
+    this.menuItemSelected = menu.label;
+    
   }
+
 }
 

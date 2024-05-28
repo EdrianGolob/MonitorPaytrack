@@ -11,6 +11,7 @@ export interface Prestacao {
     centro_custo: string;
     rateio_centro_custo: string;
     rateio_cc: string;
+    unid_negocio: string;
 	
 }
 

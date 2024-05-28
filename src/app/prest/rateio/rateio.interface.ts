@@ -5,7 +5,6 @@ export interface Rateio {
 	percentual_rateio: number;
 	valor_rateios: number;
 	cpf_cnpj: string;
-	
 }
 
 export interface rateioAPI { //RootObject
