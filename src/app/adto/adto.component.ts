@@ -12,8 +12,6 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-adto',
-  standalone: true,
-  imports: [SharedModule, FormsModule],
   templateUrl: './adto.component.html',
   styleUrl: './adto.component.css'
 })

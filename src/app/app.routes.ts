@@ -2,28 +2,28 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 
-export const routes: Routes = [
+const routes: Routes = [
+/*    
+
+*/
+{ path: '' , pathMatch: 'full' , redirectTo:'home'},
+
 {   
     path: '', component: AppComponent, children: [
-        { path: 'adto', loadChildren: () => import('../app/adto/adto.module').then(
-            (file) => file.AdtoModule
+        { path: 'home', loadChildren: () => import('../app/home/home.module').then(
+                (file) => file.HomeModule
             ),
         },
     ],
 },
-{   
-    path: '', component: AppComponent, children: [
-        { path: 'prest', loadChildren: () => import('../app/prest/prest.module').then(
-                (file) => file.PrestModule
-            ),
-        },
-    ],
-},
+
 ];
 
-NgModule(
+@NgModule(
     {
         imports: [RouterModule.forChild(routes)],
         exports: [RouterModule],
     }
 )
+
+export class AppRoutingModule{}

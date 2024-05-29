@@ -34,6 +34,7 @@
             name='emissaoIni'
             p-format="dd/mm/yyyy"
             [(ngModel)]="filterData.dataEmissaoIni"
+            [ngModelOptions]="{standalone: true}"
          >
          </po-datepicker>
          
@@ -43,6 +44,7 @@
             name="emissaoFim"
             p-format="dd/mm/yyyy"
             [(ngModel)]="filterData.dataEmissaoDim"
+            [ngModelOptions]="{standalone: true}"
          >
          </po-datepicker>
       </div>
@@ -53,6 +55,7 @@
             p-label="Documento Inicial"
             name="documentoIni"
             [(ngModel)]="filterData.codigoDocumentoIni"
+            [ngModelOptions]="{standalone: true}"
          >
          </po-input>
          
@@ -61,6 +64,7 @@
             p-label="Documento Final"
             name="documentoFim"
             [(ngModel)]="filterData.codigoDocumentoFim"
+            [ngModelOptions]="{standalone: true}"
          >
          </po-input>
       </div>
@@ -71,6 +75,7 @@
             p-label="CPF/CNPJ Inicial"
             name="cpfCnpjIni"
             [(ngModel)]="filterData.cpfCnpjIni"
+            [ngModelOptions]="{standalone: true}"
          >
          </po-input>
          <po-input
@@ -78,6 +83,7 @@
             p-label="CPF/CNPJ Final"
             name="cpfCnpjFim"
             [(ngModel)]="filterData.cpfCnpjFim"
+            [ngModelOptions]="{standalone: true}"
          >
          </po-input>
       </div>   

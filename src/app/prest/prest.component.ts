@@ -10,8 +10,6 @@ import { SessionStorageService } from '../shared/services/storage.service';
 
 @Component({
   selector: 'app-prest',
-  standalone: true,
-  imports: [SharedModule, FormsModule],
   templateUrl: './prest.component.html',
   styleUrl: './prest.component.css'
 })
