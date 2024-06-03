@@ -17,13 +17,15 @@ export class HomeComponent implements OnInit{
      //action: this.menuAction.bind(this),       ss
      
      link: './adto', 
-     icon: 'po-icon po-icon-star'},
+     icon: 'po-icon-star',
+     shortLabel: 'Adiantamento'},
 
     {label: 'Prestação de Contas', 
      //shortLabel: 'Prest',
      //action: this.menuAction.bind(this),  
      link: './prest', 
-     icon: 'po-icon po-icon-money'}
+     icon: 'po-icon-money',
+     shortLabel: 'Prestação de Contas'}
   ]
   
  

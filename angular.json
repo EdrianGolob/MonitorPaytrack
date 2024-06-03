@@ -76,6 +76,12 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+            "production": {
+              "browserTarget": "allcash:build:production"
+            },
+            "development": {
+              "browserTarget": "allcash:build:development"
+            }
           },
           "defaultConfiguration": "development"
         },
