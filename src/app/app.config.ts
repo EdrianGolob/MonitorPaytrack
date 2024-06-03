@@ -1,5 +1,5 @@
 import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
+import { appRoutes } from './app.routes';
 
 import { ApplicationConfig, importProvidersFrom, LOCALE_ID } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
@@ -12,7 +12,7 @@ registerLocaleData(localePt) //atencao
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(appRoutes),
     provideHttpClient(),
     importProvidersFrom([BrowserAnimationsModule, PoHttpRequestModule]),
     {provide:LOCALE_ID,useValue:'pt-BR'} //atencao

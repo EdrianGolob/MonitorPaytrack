@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PoModalAction, PoModalComponent, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { Observable} from 'rxjs';
@@ -12,12 +12,14 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-adto',
+  standalone: true,
   templateUrl: './adto.component.html',
-  styleUrl: './adto.component.css'
+  styleUrl: './adto.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AdtoComponent implements OnInit {
-  @ViewChild(PoModalComponent, { static: true}) poModal:any = PoModalComponent;
+  @ViewChild(PoModalComponent, { static: true}) poModal!: PoModalComponent;
 
   filterData: any = {
     dataEmissaoIni: new Date(),
@@ -99,6 +101,10 @@ export class AdtoComponent implements OnInit {
 
     this.hasMore$ = obs$.pipe(pluck('hasNext'));
 
+  }
+
+  abrirModal() {
+    this.poModal.open()
   }
 }
 

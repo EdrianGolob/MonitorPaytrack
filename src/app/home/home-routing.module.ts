@@ -11,7 +11,6 @@ const routes: Routes = [
     path: '', component: HomeComponent, children: [
       { path: 'adto', loadChildren: () => {return AdtoModule} },
       { path: 'prest', loadChildren: () => { return PrestModule} }
-      
     ],
   },
 

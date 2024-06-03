@@ -1,21 +1,19 @@
-
-import { Component, OnInit, ViewChild } from '@angular/core';
-
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PoModalAction, PoModalComponent, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
-import { SharedModule } from '../shared/shared.module';
-import { FormsModule } from '@angular/forms';
 import { PrestService } from '../shared/services/prest.service';
 import { SessionStorageService } from '../shared/services/storage.service';
 
 @Component({
   selector: 'app-prest',
+  standalone: true,
   templateUrl: './prest.component.html',
-  styleUrl: './prest.component.css'
+  styleUrl: './prest.component.css',
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 
 export class PrestComponent implements OnInit {
-   @ViewChild(PoModalComponent, { static: true}) poModal:any = PoModalComponent;
+   @ViewChild(PoModalComponent, { static: true}) poModal!: PoModalComponent;
 
    filterData: any = {
     dataEmissaoIni: new Date(),
@@ -110,6 +108,10 @@ export class PrestComponent implements OnInit {
   recupaDados() {
     const jsonData = this.storageService.getDados('DadosPrest')
     this.itens = jsonData
+  }
+
+  abrirModal() {
+    this.poModal.open()
   }
   
 }

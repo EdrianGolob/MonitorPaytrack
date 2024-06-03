@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
+import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import { PoMenuItem } from '@po-ui/ng-components';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeComponent {
 
@@ -33,8 +34,6 @@ export class HomeComponent {
   ngOnInit(): void {}
     
  
-
-
   menuAction(menu: PoMenuItem) {
     this.menuItemSelected = menu.label;
     
