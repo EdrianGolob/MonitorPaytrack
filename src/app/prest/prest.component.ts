@@ -6,10 +6,8 @@ import { SessionStorageService } from '../shared/services/storage.service';
 
 @Component({
   selector: 'app-prest',
-  standalone: true,
   templateUrl: './prest.component.html',
   styleUrl: './prest.component.css',
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 
 export class PrestComponent implements OnInit {

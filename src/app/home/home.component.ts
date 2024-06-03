@@ -1,21 +1,21 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { PoMenuItem } from '@po-ui/ng-components';
 import { Router } from '@angular/router';
+import { HomeModule } from './home.module';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
   menus: Array<PoMenuItem> = 
   [
     {label: 'Adiantamento',        
      //shortLabel: 'Adto', 
-     //action: this.menuAction.bind(this),       
+     //action: this.menuAction.bind(this),       ss
+     
      link: './adto', 
      icon: 'po-icon po-icon-star'},
 
